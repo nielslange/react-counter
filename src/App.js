@@ -3,19 +3,10 @@ import "./App.css";
 
 function App() {
   const [counter, setCounter] = useState(0);
-  const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
     document.title = `Counter: ${counter}`;
   });
-
-  useEffect(() => {
-    if (counter == 0) {
-      setDisabled(true);
-      return;
-    }
-    setDisabled(false);
-  }, [counter]);
 
   const handleIncrement = () => {
     setCounter(counter + 1);
@@ -31,7 +22,7 @@ function App() {
       <p>{counter}</p>
       <p>
         <button onClick={handleIncrement}>Increment</button>
-        <button onClick={handleDecrement} disabled={disabled}>
+        <button onClick={handleDecrement} disabled={counter <= 0}>
           Decrement
         </button>
       </p>
