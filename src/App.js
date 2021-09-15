@@ -1,28 +1,28 @@
-import { useEffect, useState } from 'react';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
   const [counter, setCounter] = useState(0);
   const [disabled, setDisabled] = useState(true);
-  
+
   useEffect(() => {
-    document.title = `The counter stands on ${counter}`;
+    document.title = `Counter: ${counter}`;
   });
+
+  useEffect(() => {
+    if (counter == 0) {
+      setDisabled(true);
+      return;
+    }
+    setDisabled(false);
+  }, [counter]);
 
   const handleIncrement = () => {
     setCounter(counter + 1);
-    setDisabled(false);
   };
-  
-  const handleDecrement = () => { 
-    if (counter > 0) {
-      setCounter(counter - 1)
-      setDisabled(false);
-    } 
 
-    if (counter === 1) {
-      setDisabled(true);
-    }
+  const handleDecrement = () => {
+    setCounter(counter - 1);
   };
 
   return (
@@ -31,7 +31,9 @@ function App() {
       <p>{counter}</p>
       <p>
         <button onClick={handleIncrement}>Increment</button>
-        <button onClick={handleDecrement} disabled={disabled}>Decrement</button>
+        <button onClick={handleDecrement} disabled={disabled}>
+          Decrement
+        </button>
       </p>
     </div>
   );
